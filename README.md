@@ -1,6 +1,6 @@
-[![Build Status](https://travis-ci.com/dakc/merodb.svg)](https://travis-ci.com/dakc/merodb)
+[![Build Status](https://travis-ci.com/dakc/merodb.svg?branch=master)](https://travis-ci.com/dakc/merodb)
 [![npm](https://img.shields.io/npm/v/merodb.svg)](https://www.npmjs.com/package/merodb) 
-[![GitHub license](https://img.shields.io/github/license/dakc/merodb.svg)](https://github.com/dakc/mero/blob/master/LICENSE) 
+[![GitHub license](https://img.shields.io/github/license/dakc/merodb.svg?style=popout)](https://github.com/dakc/mero/blob/master/LICENSE) 
 # How To Use
 ## 1. Npm
 Install the library by using following command.
@@ -11,7 +11,7 @@ npm install --save-dev merodb
 Create MeroDB Instance
 ```
 const MeroDB = require("merodb");
-let myDb = new MeroDB();
+var myDb = new MeroDB();
 ```
 
 ## 2. Browser
@@ -24,7 +24,7 @@ Create Instance after the dom contents are loaded.
 ```
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        var myDb = new merodb();
+        var myDb = new MeroDB();
     });
 </script>
 ```

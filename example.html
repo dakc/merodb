@@ -4,29 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>MeroDB</title>
 </head>
-
 <body>
-    <h3>Hello World!</h3>
+    <h3>Hello MeroDB!</h3>
     <div></div>
-    
-    <script src="./dist/kdb.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            var myDb = new KDb();
+            var myDb = new MeroDB();
             // create data to be inserted
             let userData = [];
             userData.push({ id: 1, name: "pk", salary: 10 });
-            userData.push({ id: 2, name: "ck", age: 20, salary: 20, sex: "M" });
+            userData.push({ id: 2, name: "ck", age: 20, salary: 20, sex: "F" });
             userData.push({ id: 3, name: "dk", create: "2018-01-20", sex: "M", salary: 35 });
             userData.push({ id: 4, name: "kk", salary: 25, sex: "M" });
             userData.push({ id: 5, name: "kk", salary: 15 });
 
+            // load userData into "user" collection
             myDb.loadFromJsonObject("user", userData);
+            // activate "user" collection
             myDb.use("user");
-            document.querySelector("div").innerText = JSON.stringify(myDb.find({}));
+            // search data having salary greater then 10 and sex M
+            var searchCondition = {salary:{$gt:10}, sex:"M"};
+            // find data
+            var specificData = myDb.find(searchCondition);
+            // show the result
+            document.querySelector("div").innerText = JSON.stringify(specificData);
         });
     </script>
+    <script src="./dist/merodb.min.js"></script>
 </body>
 </html>
