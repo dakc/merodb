@@ -1,0 +1,39 @@
+{
+  "name": "merodb",
+  "version": "1.0.0",
+  "description": "Manipulate javascript Objects as like No SQL.",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack",
+    "test": "mocha test/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dakc/merodb.git"
+  },
+  "keywords": [
+    "javascript",
+    "database",
+    "inline",
+    "simple",
+    "manipulate",
+    "object"
+  ],
+  "author": "dakc",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dakc/merodb/issues"
+  },
+  "homepage": "https://github.com/dakc/merodb#readme",
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.3.1",
+    "babel-loader": "^8.0.5",
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0",
+    "webpack": "^4.29.3",
+    "webpack-cli": "^3.2.3",
+    "webpack-dev-server": "^3.1.14"
+  },
+  "dependencies": {}
+}

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>Hello World!</h3>
+    <div></div>
+    
+    <script src="./dist/kdb.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var myDb = new KDb();
+            // create data to be inserted
+            let userData = [];
+            userData.push({ id: 1, name: "pk", salary: 10 });
+            userData.push({ id: 2, name: "ck", age: 20, salary: 20, sex: "M" });
+            userData.push({ id: 3, name: "dk", create: "2018-01-20", sex: "M", salary: 35 });
+            userData.push({ id: 4, name: "kk", salary: 25, sex: "M" });
+            userData.push({ id: 5, name: "kk", salary: 15 });
+
+            myDb.loadFromJsonObject("user", userData);
+            myDb.use("user");
+            document.querySelector("div").innerText = JSON.stringify(myDb.find({}));
+        });
+    </script>
+</body>
+</html>
