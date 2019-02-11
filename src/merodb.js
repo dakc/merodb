@@ -42,7 +42,10 @@ class MeroDB extends Core{
             this.err = "Collection name should not be empty string.";
             return false;
         }
-
+        if(typeof isActivate !== "boolean"){
+            this.err = "Second parameter should be boolean.";
+            return false;
+        }
         if (Object.prototype.hasOwnProperty.call(this.clcn, collectionName)) {
             this.err = `Collection name 「${collectionName}」 already exists.`;
             return false;
@@ -244,6 +247,13 @@ class MeroDB extends Core{
      */
     getError() {
         return this.err;
+    }
+
+    /**
+     * get the list of collection
+     */
+    getCollections() {
+        return Object.keys(this.clcn)
     }
 }
 

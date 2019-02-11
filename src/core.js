@@ -28,11 +28,21 @@ class Core{
         let isExists = false;
         let execCalc = ((op,x,y) => {
             if(op == "$e") return x === y;
+            if(op == "$ne") return x != y;
             if(op == "$lt") return x < y;
             if(op == "$lte") return x <= y;
             if(op == "$gt") return x > y;
             if(op == "$gte") return x >= y;
-            if(op == "$ne") return x != y;
+            if(op == "$cont") return x.includes(y);
+            if(op == "$bt") {
+                if(typeof y != "object") return false;
+                if (!Array.isArray(y)) return false;
+                if(y.length !== 2) return false;
+                if(x >= y[0] && x <= y[1]) return true;
+                if(x >= y[1] && x <= y[0]) return true;
+                return false;
+            }
+            return false;
         });
 
         let operator = Object.keys(searchObj)[0];      

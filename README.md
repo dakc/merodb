@@ -30,6 +30,7 @@ Create Instance after the dom contents are loaded.
 ```
 
 ### 3. Create Collection
+###### <collection name>, <is activate>?
 MeroDB can hold multiple collection. As like a "Table" in RDBMS first create COLLECTION.
 The first parameter is name of collection.It should be of string type.
 ```
@@ -43,8 +44,13 @@ if(isCreated === false){
 }
 ```
 
+get collection lest
+```
+var myCollections = myDb.getCollections();
+```
 
 ### 4. Insert Data
+###### <collection name>?, <data>
 The first parameteter is name of collection where data is to be inserted. It should be of string type.
 Second parameter is the actual data which we want to save in the collection. It should be of object type.
 ```
@@ -53,7 +59,7 @@ var data2 = {id:3,place:"Europe",color:"green"};
 myDb.insert("continent",data1);
 myDb.insert("continent",data2);
 ```
-However, first parameter can be ... if a collection is activated.
+However, first parameter can be omitted if a collection is activated.
 To activate a collection "use" method is executed.
 ```
 myDb.use("continent");
@@ -84,6 +90,7 @@ myDb.loadFromJsonObject("user", userData);
 ```
 
 ### 5. Find
+###### <collection name>?, <condition>,<column headers>?
 
 | parameter             | numbers | usage                         | description                 |
 | --------------------- | ------- | ----------------------------- |---------------------------- |
@@ -104,12 +111,14 @@ var searchResult = myDb.find(searchConditionObject, resultColumnArray);
  | name | meaning | usage |
  |------|---------|-----|
  | $e | equals | { id: { $e: 200 } } |
+  | $ne | not equal | { id: { $ne: 200 } } |
  | $lt | less then | { id: { $lt: 200 } }
  | $lte | less then or equal | { id: { $lte: 200 } } |
  | $gt | greater then | { id: { $gt: 200 } } |
  | $gte | greater then or equal | { id: { $gte: 200 } }
- | $ne | not equal | { id: { $ne: 200 } } |
-
+ | $bt | between | { id: [2, 5] } |
+ | $cont | contains | { name: { $cont: "a" } } |
+ 
 ##### Uses-1
 ```
 var searchResult = myDb.find("user",{ id: { $gte: 4 } });
@@ -134,11 +143,19 @@ var searchResult = myDb.find({
 ```
 
 #### 6. Update
+###### <collection name>?, <condition>, <new value>
+
 TODO
 ```
-
+var searchCondition = { id: { $lt: 2 } };
+var newData = { $set: { name: "harilarl" } };
+myDb.update(searchCondition, newData);
 ```
 
+get number of documents affected
+```
+var num = myDb.collAffected();
+```
 
 #### 7. Delete
 TODO
