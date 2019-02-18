@@ -2,7 +2,8 @@
 [![npm](https://img.shields.io/npm/v/merodb.svg)](https://www.npmjs.com/package/merodb) 
 [![GitHub license](https://img.shields.io/github/license/dakc/merodb.svg?style=popout)](https://github.com/dakc/mero/blob/master/LICENSE) 
 # How To Use
-## 1. Npm
+## 1. Installation
+### Npm
 Install the library by using following command.
 ```
 npm install --save-dev merodb
@@ -14,23 +15,23 @@ const MeroDB = require("merodb");
 var myDb = new MeroDB();
 ```
 
-## 2. Browser
+### Browser
 Load "merodb.min.js" file which is on dist folder.
 [SAMPLE](example.html)
 ```
-<script src="./dist/merodb.min.js"></script>
+&lt;script src="./dist/merodb.min.js"&gt;&lt;/script&gt;
 ```
 Create Instance after the dom contents are loaded.
 ```
-<script>
+&lt;script&gt;
     document.addEventListener('DOMContentLoaded', function() {
         var myDb = new MeroDB();
     });
-</script>
+&lt;/script&gt;
 ```
 
-### 3. Create Collection
-###### <collection name>, <is activate>?
+### 2. Create Collection
+###### &lt;collection name&gt;, &lt;is activate&gt;?
 MeroDB can hold multiple collection. As like a "Table" in RDBMS first create COLLECTION.
 The first parameter is name of collection.It should be of string type.
 ```
@@ -44,20 +45,36 @@ if(isCreated === false){
 }
 ```
 
-get collection lest
+Get collection list
 ```
 var myCollections = myDb.getCollections();
 ```
+### 3. Activate Collection
+###### &lt;collection name&gt;
+@returns: boolean (true:success, false:error)
+```
+var isCollectionActivated = myDb.use("continent");
+if(isCollectionActivated == true){
+    console.log("collection is activated");
+}else{
+    console.error(myDb.GetError());
+}
+```
 
 ### 4. Insert Data
-###### <collection name>?, <data>
-The first parameteter is name of collection where data is to be inserted. It should be of string type.
-Second parameter is the actual data which we want to save in the collection. It should be of object type.
+###### &lt;collection name&gt;?, &lt;data&gt;
+@returns: boolean (true:success, false:error)
+| parameter             | type |  description                 |
+| --------------------- | ------- | -----------------------------|
+| collection name                |   string | it can be omitted for [active collection](#active_collection) |
+| data         |   object    | data to be inserted in a collection |
+
 ```
 var data1 = {id:1,place:"Asia",color:"red"};
 var data2 = {id:3,place:"Europe",color:"green"};
-myDb.insert("continent",data1);
-myDb.insert("continent",data2);
+var collectionName = "continent";
+myDb.insert(collectionName,data1);
+myDb.insert(collectionName,data2);
 ```
 However, first parameter can be omitted if a collection is activated.
 To activate a collection "use" method is executed.
@@ -78,6 +95,12 @@ myDb.insert({id:7,place:"Antartica",color:"pink"});
 
 ##### Create From Existing Object
 Collections can be created from existing Objects.
+###### &lt;collection name&gt;?, &lt;data&gt;
+@returns: boolean (true:success, false:error)
+| parameter             | type |  description                 |
+| --------------------- | ------- | -----------------------------|
+| collection name                |   string | it can be omitted for [active collection](#active_collection) |
+| data         |   object    | existing data to be inserted in a collection |
 ```
 var userData = [];
 userData.push({ id: 1, name: "pk", salary: 10 });
@@ -90,7 +113,8 @@ myDb.loadFromJsonObject("user", userData);
 ```
 
 ### 5. Find
-###### <collection name>?, <condition>,<column headers>?
+###### &lt;collection name&gt;?, &lt;[condition](#search-condition)&gt;,&lt;column headers&gt;?
+@returns: array of documents fulfilling given condition
 
 | parameter             | numbers | usage                         | description                 |
 | --------------------- | ------- | ----------------------------- |---------------------------- |
@@ -143,32 +167,88 @@ var searchResult = myDb.find({
 ```
 
 #### 6. Update
-###### <collection name>?, <condition>, <new value>
+###### &lt;collection name&gt;?, &lt;[condition](#search-condition)&gt;, &lt;new value&gt;
+@returns: boolean (true:success, false:error)
+| parameter             | type |  description                 |
+| --------------------- | ------- | -----------------------------|
+| collection name                |   string | it can be omitted for [active collection](#active_collection) |
+| condition         |   object    | documents fulfilling this condition will be updated with new value  |
+| new value |   object     | this value will be the new value |
 
-TODO
+##### Note
+if the &lt;new value&gt; does not contain "$set" key then all the the data of the document fulfilling given condition will be replaced with the &lt;new value&gt; object.
+```
+// create instance of MeroDB
+var myDb = new MeroDB();
+// create collection with name "user" and activate
+myDb.createCollection("user", true);
+// insert two documents in the active collection
+myDb.insert({ id: 1, name: "hbeauty", enroll: "2018-01-20", sex: "M", salary: 15 });
+myDb.insert({ id: 2, name: "dakc", enroll: "2017-02-28", sex: "F", salary: 35 });
+// update active collection having its documents id = 2
+myDb.update({ id: 2 }, { id: 1111, name: "tom" });
+
+// get current data from active collection
+var newData = myDb.find({});
+console.log(newData[0], newData[1]);
+// Object {id: 1, name: "hbeauty", enroll: "2018-01-20", sex: "M", salary: 15}
+// Object {name: "tom"}
+// the result will be as following where second document is completely replaced.
+```
+If &lt;new value&gt; contains "$set" key then it will update the the keys set.
+```
+// update active collection having its documents id = 2
+myDb.update({ id: 2 }, { $set: { id: 1111, name: "tom" } });
+
+// get current data from active collection
+var newData = myDb.find({});
+console.log(newData[0], newData[1]);
+//Object {id: 1, name: "hbeauty", enroll: "2018-01-20", sex: "M", salary: 15}
+//Object {id: 1111, name: "tom", enroll: "2017-02-28", sex: "F", salary: 35}
+// only id,name were updated.
+```
+
+Condition is object which is exactly similar to the condition for find method.
+[usable conditions](#search-condition)
+##### Uses 1
 ```
 var searchCondition = { id: { $lt: 2 } };
 var newData = { $set: { name: "harilarl" } };
 myDb.update(searchCondition, newData);
 ```
 
-get number of documents affected
+Get number of documents updated
 ```
-var num = myDb.collAffected();
+var updatedNumber = myDb.collAffected();
+console.log("number of updated documents is " + updatedNumber);
 ```
 
 #### 7. Delete
-TODO
+###### &lt;collection name&gt;?, &lt;[condition](#search-condition)&gt;
+@returns: boolean (true:success, false:error)
+##### Uses 1
+Delete from user where id is less then two.
 ```
-var isDel = myDb.delete({ isbn: 2346 });
+var searchCondition = { id: { $lt: 2 } };
+var documentName = "user"
+var isDelete = myDb.delete(documentName, searchCondition);
+if (isDelete == true) {
+    console.log("Deleted.");
+}
 ```
-
+Get number of documents deleted
+```
+var deletedNumber = myDb.collAffected();
+console.log("number of deleted documents is " + deletedNumber);
+```
 
 ### Todos
  - Write MORE use cases for find
  - Write MORE use cases for update
  - Write MORE use cases for delete
- - 
+ - Make README more readable
+ - Add Encryption for nodejs
+ - Add Error Description for every possible case
 
 License
 ----
