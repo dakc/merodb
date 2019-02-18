@@ -94,14 +94,16 @@ myDb.createCollection("continent", true);
 myDb.insert({id:7,place:"Antartica",color:"pink"});
 ```
 
-##### Create From Existing Object
+### Create From Existing Object
 Collections can be created from existing Objects.
 ###### &lt;collection name&gt;?, &lt;data&gt;
 @returns: boolean (true:success, false:error)
-| parameter             | type |  description                 |
-| --------------------- | ------- | -----------------------------|
-| collection name                |   string | it can be omitted for [active collection](#3-activate-collection) |
-| data         |   object    | existing data to be inserted in a collection |
+
+| paramete        | type   |  description                 |
+| --------------- | ------ | -----------------------------|
+| collection name | string | it can be omitted for [active collection](#3-activate-collection) |
+| data            | object | existing data to be inserted in a collection |
+
 ```
 var userData = [];
 userData.push({ id: 1, name: "pk", salary: 10 });
@@ -122,6 +124,7 @@ myDb.loadFromJsonObject("user", userData);
 | object                |   1     | search condition              | returns all the document satisfiying this condition |
 | object, array         |   2     | search condition, column list | similar to case 1 but only the columns listed will be returned |
 | string, object, array |   3     | collection name, search condition, column list | name of collection can be explicitly applied |
+
 ```
 var searchTableString = "user";
 var searchConditionObject = { place: "Asia" };
@@ -170,11 +173,12 @@ var searchResult = myDb.find({
 #### 6. Update
 ###### &lt;collection name&gt;?, &lt;[condition](#search-condition)&gt;, &lt;new value&gt;
 @returns: boolean (true:success, false:error)
-| parameter             | type |  description                 |
-| --------------------- | ------- | -----------------------------|
-| collection name                |   string | it can be omitted for [active collection](#3-activate-collection) |
-| condition         |   object    | documents fulfilling this condition will be updated with new value  |
-| new value |   object     | this value will be the new value |
+
+| paramet         | type   |  description                 |
+| --------------- | ------ | -----------------------------|
+| collection name | string | it can be omitted for [active collection](#3-activate-collection) |
+| condition       | object | documents fulfilling this condition will be updated with new value  |
+| new value       | object | this value will be the new value |
 
 ##### Note
 if the &lt;new value&gt; does not contain "$set" key then all the the data of the document fulfilling given condition will be replaced with the &lt;new value&gt; object.
