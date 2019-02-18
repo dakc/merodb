@@ -19,15 +19,15 @@ var myDb = new MeroDB();
 Load "merodb.min.js" file which is on dist folder.
 [SAMPLE](example.html)
 ```
-&lt;script src="./dist/merodb.min.js"&gt;&lt;/script&gt;
+<script src="./dist/merodb.min.js"></script>;
 ```
 Create Instance after the dom contents are loaded.
 ```
-&lt;script&gt;
+<script>
     document.addEventListener('DOMContentLoaded', function() {
         var myDb = new MeroDB();
     });
-&lt;/script&gt;
+</script>
 ```
 
 ### 2. Create Collection
@@ -64,10 +64,11 @@ if(isCollectionActivated == true){
 ### 4. Insert Data
 ###### &lt;collection name&gt;?, &lt;data&gt;
 @returns: boolean (true:success, false:error)
-| parameter             | type |  description                 |
-| --------------------- | ------- | -----------------------------|
-| collection name                |   string | it can be omitted for [active collection](#active_collection) |
-| data         |   object    | data to be inserted in a collection |
+
+| parameter       | type   |  description                 |
+| --------------- | ------ | -----------------------------|
+| collection name | string | it can be omitted for [active collection](#3-activate-collection) |
+| data            | object | data to be inserted in a collection |
 
 ```
 var data1 = {id:1,place:"Asia",color:"red"};
@@ -99,7 +100,7 @@ Collections can be created from existing Objects.
 @returns: boolean (true:success, false:error)
 | parameter             | type |  description                 |
 | --------------------- | ------- | -----------------------------|
-| collection name                |   string | it can be omitted for [active collection](#active_collection) |
+| collection name                |   string | it can be omitted for [active collection](#3-activate-collection) |
 | data         |   object    | existing data to be inserted in a collection |
 ```
 var userData = [];
@@ -171,7 +172,7 @@ var searchResult = myDb.find({
 @returns: boolean (true:success, false:error)
 | parameter             | type |  description                 |
 | --------------------- | ------- | -----------------------------|
-| collection name                |   string | it can be omitted for [active collection](#active_collection) |
+| collection name                |   string | it can be omitted for [active collection](#3-activate-collection) |
 | condition         |   object    | documents fulfilling this condition will be updated with new value  |
 | new value |   object     | this value will be the new value |
 
