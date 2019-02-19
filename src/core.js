@@ -147,14 +147,15 @@ class Core{
 
         // update all row
         else {
-            Object.keys(dtObj).forEach(key => {
-                searchResult.forEach(itm=>{
-                    itm[key] = dtObj[key];
-                    Object.keys(itm).forEach(itmKey=> {
-                        if(itmKey != key) delete itm[itmKey];
-                    })
-                })
-            })            
+            searchResult.forEach(function(item) {
+                Object.keys(item).forEach(key => {
+                    delete item[key];
+                });
+
+                Object.keys(dtObj).forEach(key => {
+                    item[key] = dtObj[key];
+                });
+              });
         }
 
         return true;

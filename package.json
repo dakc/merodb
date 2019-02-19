@@ -1,6 +1,6 @@
 {
   "name": "merodb",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Manipulate javascript Objects as like No SQL.",
   "main": "index.js",
   "scripts": {
@@ -12,12 +12,9 @@
     "url": "https://github.com/dakc/merodb.git"
   },
   "keywords": [
-    "javascript",
-    "database",
+    "javascript database",
     "inline",
-    "simple",
-    "manipulate",
-    "object"
+    "simple"
   ],
   "author": "dakc<dakc@outlook.jp>",
   "license": "MIT",
