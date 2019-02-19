@@ -5,7 +5,7 @@ module.exports = {
     target: 'node',
     entry: {
         'merodb.min': './src/merodb.js',
-        'merodb.node': './index.js'
+        'merodb.node': './src/node.js'
     },
     output: {
         path: path.resolve(__dirname, 'dist'),

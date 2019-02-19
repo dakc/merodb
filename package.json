@@ -2,7 +2,7 @@
   "name": "merodb",
   "version": "1.0.2",
   "description": "Manipulate javascript Objects as like No SQL.",
-  "main": "index.js",
+  "main": "dist/merodb.node.js",
   "scripts": {
     "build": "webpack",
     "test": "mocha test/*.js"

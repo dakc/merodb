@@ -1,8 +1,7 @@
 'use strict';
 
 const fs = require('fs');
-const MeroDB = require("./src/merodb");
-
+const MeroDB = require("./merodb");
 
 MeroDB.prototype.writeOnFile = function(filePath,pass="") {
     try {

@@ -1,5 +1,5 @@
 const assert = require("chai").assert;
-const MeroDB = require("../index.js");
+const MeroDB = require("../src/node");
 
 // check for reading and writtig from and to a file
 describe("writting to file and reading from file", function () {
