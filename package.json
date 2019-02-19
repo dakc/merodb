@@ -1,6 +1,6 @@
 {
   "name": "merodb",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "Manipulate javascript Objects as like No SQL.",
   "main": "index.js",
   "scripts": {
@@ -29,8 +29,7 @@
     "chai": "^4.2.0",
     "mocha": "^5.2.0",
     "webpack": "^4.29.3",
-    "webpack-cli": "^3.2.3",
-    "webpack-dev-server": "^3.1.14"
+    "webpack-cli": "^3.2.3"
   },
   "dependencies": {}
 }
