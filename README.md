@@ -3,7 +3,8 @@
 [![GitHub license](https://img.shields.io/github/license/dakc/merodb.svg?style=popout)](https://github.com/dakc/mero/blob/master/LICENSE) 
 
 # Documents
-Look here for [HOW TO USE - https://dakc.github.io/merodb/](https://dakc.github.io/merodb/) MeroDB.
+Look here for [HOW TO USE](https://dakc.github.io/merodb/) MeroDB.
+(https://dakc.github.io/merodb/)
 
 ### Todos
  - Write MORE use cases for find
