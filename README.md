@@ -2,8 +2,17 @@
 [![npm](https://img.shields.io/npm/v/merodb.svg)](https://www.npmjs.com/package/merodb) 
 [![GitHub license](https://img.shields.io/github/license/dakc/merodb.svg?style=popout)](https://github.com/dakc/merodb/blob/master/LICENSE) 
 
-# Documents
-Look here for [HOW TO USE](https://dakc.github.io/merodb/) MeroDB.
+# Installation
+#### Npm
+```
+npm install --save-dev merodb
+```
+#### Browser
+```
+<script src="./dist/merodb.min.js"></script>
+```
+
+Look here for [Complete Documentation](https://dakc.github.io/merodb/) .
 (https://dakc.github.io/merodb/)
 
 ### Todos
