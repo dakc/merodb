@@ -2,8 +2,9 @@
 [![npm](https://img.shields.io/npm/v/merodb.svg)](https://www.npmjs.com/package/merodb) 
 [![GitHub license](https://img.shields.io/github/license/dakc/merodb.svg?style=popout)](https://github.com/dakc/merodb/blob/master/LICENSE) 
 
-# How To Use
-[Documentation](https://dakc.github.io/merodb/)
+# Documents
+Look here for [HOW TO USE](https://dakc.github.io/merodb/) MeroDB.
+(https://dakc.github.io/merodb/)
 
 ### Todos
  - Write MORE use cases for find
@@ -12,7 +13,3 @@
  - Make README more readable
  - Add Encryption for nodejs
  - Add Error Description for every possible case
-
-License
-----
-[MIT](LICENSE)
