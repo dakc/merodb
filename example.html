@@ -1,37 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>MeroDB</title>
+    <!--[if IE]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.2.5/polyfill.min.js"></script>
+    <![endif]-->
+    <style>em{color:#ff0000;}div{margin-bottom:15px;}</style>
 </head>
+
 <body>
-    <h3>Hello MeroDB!</h3>
-    <div></div>
+    <h3>How To Use MeroDB!</h3>
+    <div>
+        We will learn following points from this tutorial.
+        <ol>
+            <li>Load data into a database</li>
+            <li>activate a collection</li>
+            <li>get all data from a collection</li>
+            <li>get documents fullfilling given condition</li>
+            <li>insert new documents</li>
+            <li>update documents</li>
+            <li>delete documents</li>
+        </ol>
+        <em>※ Please see Javascript portion for to learn how to use MeroDB.</em>
+    </div>
+
+    <h3>1. Select</h3>
+    <em>Select all documents</em>
+    <div id="select-all"></div>
+    <em>Select documents having salary greater then 10 and sex M</em>
+    <div id="select"></div>
+    <hr>
+
+    <h3>2. Insert</h3>
+    <em>Insert a new document {id:6,name:"ok",salary:55,sex:"F"}</em>
+    <div id="insert"></div>
+    <hr>
+
+    <h3>3. Update</h3>
+    <em>update salary to 66 for documents having age between 20 and 30.</em>
+    <div id="update"></div>
+    <hr>
+
+    <h3>4. Delete</h3>
+    <em>Delete documents whose name contains "k"</em>
+    <div id="delete"></div>
+
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             var myDb = new MeroDB();
-            // create data to be inserted
-            let userData = [];
-            userData.push({ id: 1, name: "pk", salary: 10 });
-            userData.push({ id: 2, name: "ck", age: 20, salary: 20, sex: "F" });
-            userData.push({ id: 3, name: "dk", create: "2018-01-20", sex: "M", salary: 35 });
-            userData.push({ id: 4, name: "kk", salary: 25, sex: "M" });
-            userData.push({ id: 5, name: "kk", salary: 15 });
+            // data to be inserted
+            var userData = [
+                { id: 1, name: "pk", age:40, salary: 10 },
+                { id: 2, name: "ck", age: 20, salary: 20, sex: "F" },
+                { id: 3, name: "dk", create: "2018-01-20", sex: "M", salary: 35 },
+                { id: 4, name: "kk", salary: 25, sex: "M" },
+                { id: 5, name: "kk", salary: 15, age:30 }
+            ];
 
             // load userData into "user" collection
             myDb.loadFromJsonObject("user", userData);
             // activate "user" collection
             myDb.use("user");
+
+            // search data
+            // passing empty object as parameter will return all the documents of active collection
+            var allData = myDb.find({});
+            // select all documents and show
+            document.querySelector("#select-all").innerText = JSON.stringify(allData);
             // search data having salary greater then 10 and sex M
-            var searchCondition = {salary:{$gt:10}, sex:"M"};
+            var searchCondition = { salary: { $gt: 10 }, sex: "M" };
             // find data
             var specificData = myDb.find(searchCondition);
             // show the result
-            document.querySelector("div").innerText = JSON.stringify(specificData);
+            document.querySelector("#select").innerText = JSON.stringify(specificData);
+
+            // insert new data
+            myDb.insert({id:6,name:"jp",salary:55,sex:"F"});
+            // passing empty object as parameter will return all the documents of active collection
+            var allData = myDb.find({});
+            // show the result
+            document.querySelector("#insert").innerText = JSON.stringify(allData);
+
+            // update data having age between 20 and 30
+            var updateCondition = {age:{$bt:[20,30]}};
+            // update the salary 
+            var updateValue = {$set:{salary:66}};
+            // run update
+            var isUpdated = myDb.update(updateCondition,updateValue);
+            // show the result if updated successfully
+            if(isUpdated){
+                document.querySelector("#update").innerText = JSON.stringify(myDb.find({}));
+            }
+
+            // delete documents containing name with letter "k"
+            var deleteCondition = {name:{$cont:"k"}};
+            // run delete
+            var isDeleted = myDb.delete(deleteCondition);
+            // show the result
+            if(isDeleted){
+                document.querySelector("#delete").innerText = JSON.stringify(myDb.find({}));
+            }
         });
     </script>
     <script src="./dist/merodb.min.js"></script>
 </body>
+
 </html>
