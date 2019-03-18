@@ -3,7 +3,10 @@
 [![GitHub license](https://img.shields.io/github/license/dakc/merodb.svg?style=popout)](https://github.com/dakc/mero/blob/master/LICENSE) 
 
 # Documents
-Look here for [HOW TO USE](https://dakc.github.io/merodb/) MeroDB.
+Look here in detail for [HOW TO USE](https://dakc.github.io/merodb/) MeroDB.
+
+
+
 
 # How To Use
 ## 1. Installation
@@ -23,7 +26,7 @@ var myDb = new MeroDB();
 Load "merodb.min.js" file which is on dist folder.
 [SAMPLE](example.html)
 ```
-<script src="./dist/merodb.min.js"></script>;
+<script src="./dist/merodb.min.js"></script>
 ```
 Create Instance after the dom contents are loaded.
 ```
