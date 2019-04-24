@@ -20,7 +20,7 @@ describe("writting to file and reading from file", function () {
     myDb.insert({ isbn: 2346, price: 2000, name: "jkst" });
 
     it("should return true on writting to file", function () {
-        let isWritten = myDb.writeOnFile("./my.db");
+        let isWritten = myDb.save("./my.db");
         assert.isTrue(isWritten);
     });
     it("should return true on reading from file", function () {

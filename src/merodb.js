@@ -1,8 +1,58 @@
 'use strict';
+const fs = require('fs');
 const Core = require("./core");
 class MeroDB extends Core{
     constructor(){
         super();
+    }
+
+    /**
+     * write db contents to file
+     * @param {string} filePath - filepath to save db
+     */
+    save(filePath){
+        if(typeof filePath !== "string" || !filePath.trim()){
+            this.err = "filePath is not set";
+            return false;
+        }
+        this._writeOnFile(filePath);
+        return true;
+    }
+
+    /**
+     * write the contents of database
+     * on each insert,update and delete
+     * 
+     * @param {string} filePath  - filepath to save db
+     */
+    updateAlways(filePath){
+        if(typeof filePath !== "string" || !filePath.trim()){
+            this.err = "filePath is not set";
+            return false;
+        }
+        this.filePath = filePath;
+        this.isUpdateEveryTime = true;
+    }
+
+    /**
+     * load contents in a database from file
+     * @param {string} filePath 
+     */
+    loadFromFile(filePath){
+        try {
+            // check file existence
+            if (!fs.existsSync(filePath)) {
+                this.err = `database file ${filePath} does not exists.`;
+                return false;
+            }
+    
+            let data = fs.readFileSync(filePath);
+            this.clcn = JSON.parse(data);
+            return true;
+        } catch (error) {
+            this.err = error.message;
+        }
+        return false;
     }
 
     /**
@@ -254,6 +304,21 @@ class MeroDB extends Core{
      */
     getCollections() {
         return Object.keys(this.clcn)
+    }
+
+    /**
+     * get number of documents in a collection
+     * if no parameter is passed
+     * it will return the number of activated collection
+     * @param {string} collectionName 
+     */
+    getDocumentCount(collectionName){
+        if(typeof collectionName == "undefined") return this.clcn[this.aClcn].length;
+        if(typeof collectionName == "string" && Object.prototype.hasOwnProperty.call(this.clcn, collectionName)) {
+            return this.clcn[collectionName].length;
+        }
+        this.err = `No collection was found named ${collectionName}`;
+        return 0;
     }
 }
 
