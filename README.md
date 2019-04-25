@@ -286,7 +286,7 @@ var numberRows = myDb.getDocumentCount("user");
 ##### ・getDocumentNumAffected
 @returns: number of documents
 
-It will return the number of number of documents collections affected after update and delete process.
+It will return number of documents in a collection affected after update or delete process.
 ```
 var searchCondition = { id: { $lt: 2 } };
 var documentName = "user"
