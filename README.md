@@ -231,7 +231,7 @@ myDb.update(searchCondition, newData);
 
 Get number of documents updated
 ```
-var updatedNumber = myDb.collAffected();
+var updatedNumber = myDb.getDocumentNumAffected();
 console.log("number of updated documents is " + updatedNumber);
 ```
 
@@ -250,7 +250,7 @@ if (isDelete == true) {
 ```
 Get number of documents deleted
 ```
-var deletedNumber = myDb.collAffected();
+var deletedNumber = myDb.getDocumentNumAffected();
 console.log("number of deleted documents is " + deletedNumber);
 ```
 
@@ -279,11 +279,43 @@ If no collection name is specified then it will return the active collection's r
 ```
 var numberRows = myDb.getDocumentCount("user");
 ```
+
+##### ・getDocumentNumAffected
+@returns: number of documents
+It will return the number of number of documents collections affected after update and delete process.
+```
+var searchCondition = { id: { $lt: 2 } };
+var documentName = "user"
+var isDelete = myDb.delete(documentName, searchCondition);
+var numberRowsDeleted = myDb.getDocumentCount();
+```
+
+##### ・getActiveCollection
+@returns: name of active collection.
+It will return the name of active collection if exist.
+```
+var activeCollection = myDb.getActiveCollection();
+```
+
+##### ・getError
+@returns: error message
+It will return error content.
+```
+var errorMessage = myDb.getError();
+```
+
+##### ・getCollections
+@returns: array of collection name
+It will return all the collections as array
+```
+var arrayCollection = myDb.getCollections();
+```
+
 ### Todos
  - Write MORE use cases for find
  - Write MORE use cases for update
  - Write MORE use cases for delete
- - Make README more readable
+ - Translate README to JAPANESE
  - Add Encryption for nodejs
  - Add Error Description for every possible case
 

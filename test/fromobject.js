@@ -24,7 +24,7 @@ describe("creating database from object", function () {
     it("should return true and number of collection deleted to be 2 after deletion", function () {
         let isDel = myDb.delete({ id: {$gte:4},salary:{$lt:20} });
         assert.isTrue(isDel);
-        assert.equal(myDb.collAffected(), 1);
+        assert.equal(myDb.getDocumentNumAffected(), 1);
         assert.equal(myDb.find("user",{}).length, 4);
     });
     it("should return true on inserting valid object", function () {
@@ -32,6 +32,6 @@ describe("creating database from object", function () {
     });
     it("should return true on updating valid object", function () {
         assert.isTrue(myDb.update("user", { id: 22, name: "oraj" }, { $set: { name: "harilarl" } }));
-        assert.equal(myDb.collAffected(), 1);
+        assert.equal(myDb.getDocumentNumAffected(), 1);
     });
 });

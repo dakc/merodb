@@ -143,7 +143,7 @@ class MeroDB extends Core{
      * returns true if update is successfull
      * else returns false
      * The number of COLLECTIONS updated can be known by
-     * calling 「collAffected」 method.
+     * calling 「getDocumentNumAffected」 method.
      * 
      * @param  {...any} args 
      */
@@ -196,7 +196,7 @@ class MeroDB extends Core{
      * returns true if deletion is successfull
      * else returns false
      * The number of COLLECTIONS deleted can be known by
-     * calling 「collAffected」 method.
+     * calling 「getDocumentNumAffected」 method.
      * 
      * @param  {...any} args 
      */
@@ -224,10 +224,10 @@ class MeroDB extends Core{
     }
 
     /**
-     * returns the number of collections affected 
+     * returns the number of documents in a collections affected 
      * after update and delete process
      */
-    collAffected() {
+    getDocumentNumAffected() {
         return this.num;
     }
 

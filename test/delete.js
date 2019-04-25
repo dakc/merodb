@@ -22,12 +22,12 @@ describe("deleting documents on a collection", function () {
         let isDel = myDb.delete({ isbn: 2346 });
         assert.isTrue(isDel);
         assert.equal(myDb.find({}).length, 0);
-        assert.equal(myDb.collAffected(), 1);
+        assert.equal(myDb.getDocumentNumAffected(), 1);
     });
     it("should return true and number of collection deleted to be zero  after deletion because the condition is not satisfied", function () {
         let isDel = myDb.delete({ isbn: 3346 });
         assert.isTrue(isDel);
-        assert.equal(myDb.collAffected(), 0);
+        assert.equal(myDb.getDocumentNumAffected(), 0);
     });
     it("should return true and number of collection deleted to be 2 after deletion", function () {
         let isDel = myDb.delete("user", {  
@@ -40,6 +40,6 @@ describe("deleting documents on a collection", function () {
         });
         assert.isTrue(isDel);
         assert.equal(myDb.find("user", {}).length, 3);
-        assert.equal(myDb.collAffected(), 2);
+        assert.equal(myDb.getDocumentNumAffected(), 2);
     });
 });

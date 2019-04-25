@@ -4,13 +4,13 @@ module.exports = {
     mode: 'production',
     target: 'web',
     entry: {
-        'merodb.min': './src/merodb.js'
+        'merodb.min': ['@babel/polyfill','./src/merodb.js']
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: '[name].js',
         library: 'MeroDB',
-        // commnet: '/* MeroDB 1.0.0 | © 2019 dakc | MIT liscense */'
+        // commnet: '/* MeroDB 2.0.0 | © 2019 dakc | MIT liscense */'
     },
     module: {
         rules: [{
@@ -21,8 +21,7 @@ module.exports = {
                 options: {
                     presets: [
                         '@babel/preset-env'
-                    ],
-                    // plugins:["@babel/plugin-transform-modules-commonjs"]
+                    ]
                 }
             }]
         }]

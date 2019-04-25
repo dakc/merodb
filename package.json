@@ -1,6 +1,6 @@
 {
   "name": "merodb",
-  "version": "1.0.6",
+  "version": "2.0.0",
   "description": "Manipulate javascript Objects as like No SQL.",
   "main": "dist/merodb.node.js",
   "scripts": {
@@ -26,6 +26,7 @@
   "homepage": "https://dakc.github.io/merodb/",
   "devDependencies": {
     "@babel/core": "^7.4.3",
+    "@babel/polyfill": "^7.4.3",
     "@babel/preset-env": "^7.3.1",
     "babel-loader": "^8.0.5",
     "chai": "^4.2.0",

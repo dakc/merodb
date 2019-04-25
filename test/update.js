@@ -24,7 +24,7 @@ describe("updating datas in a collection", function () {
         let searchResult = myDb.find("user", searchCondition);
         let expectedResult = [newData];
         assert.deepEqual(searchResult, expectedResult);
-        assert.equal(myDb.collAffected(), 1);
+        assert.equal(myDb.getDocumentNumAffected(), 1);
         assert.isTrue(isUpdated);
     });
 
@@ -36,7 +36,7 @@ describe("updating datas in a collection", function () {
         let searchResult = myDb.find("user", searchCondition);
         let expectedResult = [{ id: 3, name: "new name", enroll: "2018-11-02", sex: "M", salary: 22 }];
         assert.deepEqual(searchResult, expectedResult);
-        assert.equal(myDb.collAffected(), 1);
+        assert.equal(myDb.getDocumentNumAffected(), 1);
         assert.isTrue(isUpdated);
     });
 });
