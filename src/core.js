@@ -1,5 +1,5 @@
 'use strict';
-const fs = require('fs');
+
 const  EventEmitter = require('events').EventEmitter;
 class Core extends EventEmitter{
     constructor(){
@@ -9,26 +9,11 @@ class Core extends EventEmitter{
         this.aClcn = "";
         this.num = 0;
 
-        // on update emit write data to file
+        // on update emit "update"
         this.on("update",data => {
             if(!this.filePath || !this.isUpdateEveryTime) return;
             this._writeOnFile(this.filePath);
         });
-    }
-
-    /**
-     * write db content to file
-     * @param {string} filePath  - filepath for saving database
-     */
-    _writeOnFile(filePath) {
-        try {
-            let data = JSON.stringify(this.clcn, null);
-            fs.writeFile(filePath, data,'utf8',err => {
-                if (err) throw Error(err);
-            });
-        } catch (error) {
-            this.err = error.message;
-        }
     }
 
     /**
@@ -41,6 +26,7 @@ class Core extends EventEmitter{
      *                                  for eg,{id:{$gt:20}}
      */
     _isSatisfied(searchFrom, searchCondition) {
+        this.err = "";
         if (typeof searchFrom != "object") return false;
         if (typeof searchCondition != "object") return false;
         if (Object.keys(searchCondition).length !== 1) return false;
@@ -133,6 +119,7 @@ class Core extends EventEmitter{
     }
 
     _insert(collectionName,data){
+        this.err = "";
         this.clcn[collectionName].push(data);
         this.emit("update",data);
     }
