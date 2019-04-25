@@ -291,7 +291,7 @@ It will return the number of number of documents collections affected after upda
 var searchCondition = { id: { $lt: 2 } };
 var documentName = "user"
 var isDelete = myDb.delete(documentName, searchCondition);
-var numberRowsDeleted = myDb.getDocumentCount();
+var numberRowsDeleted = myDb.getDocumentNumAffected();
 ```
 
 ##### ・getActiveCollection
