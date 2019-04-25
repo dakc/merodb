@@ -2,7 +2,7 @@ const path = require('path');
 module.exports = {
     // mode:'development',
     mode: 'production',
-    target: 'node',
+    target: 'web',
     entry: {
         'merodb.min': './src/merodb.js'
     },
@@ -21,7 +21,8 @@ module.exports = {
                 options: {
                     presets: [
                         '@babel/preset-env'
-                    ]
+                    ],
+                    // plugins:["@babel/plugin-transform-modules-commonjs"]
                 }
             }]
         }]

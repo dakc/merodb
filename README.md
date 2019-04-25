@@ -254,6 +254,31 @@ var deletedNumber = myDb.collAffected();
 console.log("number of deleted documents is " + deletedNumber);
 ```
 
+### 8. Usefull methods
+##### ・updateAlways
+###### &lt;filepath&gt;
+@returns: boolean (true:success, false:error)
+This method only works for nodejs environment. It will output the contents of database on each insert,update,delete action.
+```
+myDb.updateAlways("./my.db");
+```
+
+##### ・save
+###### &lt;filepath&gt;
+@returns: boolean (true:success, false:error)
+This method only works for nodejs environment. It will output the contents of database to given file.
+```
+myDb.save("./my.db");
+```
+
+##### ・getDocumentCount
+###### &lt;collection name&gt;?
+@returns: number of documents
+It will return the number of documents existing on given collection name.
+If no collection name is specified then it will return the active collection's row number.
+```
+var numberRows = myDb.getDocumentCount("user");
+```
 ### Todos
  - Write MORE use cases for find
  - Write MORE use cases for update
